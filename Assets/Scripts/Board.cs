@@ -1,19 +1,29 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] List<Block> blockList;
+    private static Board instance;
+    public static Board Instance { get { return instance; } }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     [SerializeField] LayerMask blockMask;
-    public Block currentBlock;
+    public Block currentBlock { get; set; }
     [SerializeField] Block blockStartPoint;
     public Block[,] boardStoreBlock = new Block[8, 8];
     private void Start()
     {
-        BuildArray2D();
+        BuildBoard();
     }
-    private void BuildArray2D()
+    private void BuildBoard()
     {
         Block currentRowBlock = blockStartPoint;
         int row = 0;
@@ -28,10 +38,6 @@ public class Board : MonoBehaviour
                 boardStoreBlock[row, col] = currentColumnBlock;
 
                 currentColumnBlock.SetPositionInBoard(row, col);
-
-                //Debug.Log($"Block at [{row}, {col}] is {currentColumnBlock.name}");
-
-                //Debug.DrawRay(currentColumnBlock.pivot.position, -Vector3.forward, Color.red, 1f);
 
                 if (Physics.Raycast(currentColumnBlock.pivot.position, -Vector3.forward, out RaycastHit hitInfo, 1f, blockMask))
                 {
@@ -55,18 +61,6 @@ public class Board : MonoBehaviour
             }
 
             row++;
-        }
-    }
-    public Block GetBlockAtPosition(int row, int col)
-    {
-        if (row >= 0 && row < 8 && col >= 0 && col < 8)
-        {
-            return boardStoreBlock[row, col];
-        }
-        else
-        {
-            Debug.LogWarning("Invalid position.");
-            return null;
         }
     }
 }

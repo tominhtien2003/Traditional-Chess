@@ -6,10 +6,26 @@ public class PieceGFX : MonoBehaviour
     private void Start()
     {
         logicCharacter = GetComponentInParent<BaseCharacter>();
-        //Debug.Log(logicCharacter!=null);
     }
     private void OnMouseDown()
     {
-        GameLogic.Instance.SelectPiece(logicCharacter);
+        if (logicCharacter != GameLogic.Instance.currentCharacter)
+        {
+            GameLogic.Instance.currentCharacter = logicCharacter;
+        }
+        else
+        {
+            Debug.Log("Piece was selected");
+            return;
+        }
+        if (CanPress())
+        {
+            GameLogic.Instance.SelectPiece(logicCharacter);
+        }
+    }
+    private bool CanPress()
+    {
+        return (GameLogic.Instance.IsBlackTurn() && logicCharacter.chessSide == ChessSide.BLACK) ||
+                (GameLogic.Instance.IsWhiteTurn() && logicCharacter.chessSide == ChessSide.WHITE);
     }
 }

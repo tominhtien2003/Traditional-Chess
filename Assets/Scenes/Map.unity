@@ -1029,6 +1029,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a2f07e5d6afa1f4c8e9c08de7fddef6, type: 3}
+--- !u!1 &274904046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274904049}
+  - component: {fileID: 274904048}
+  - component: {fileID: 274904047}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &274904047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274904046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &274904048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274904046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &274904049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274904046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &296210626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4782528536563184, guid: 80f178f5794b0164baa76e698c66c189,
@@ -1976,7 +2044,6 @@ Transform:
   m_Children:
   - {fileID: 2020952147}
   - {fileID: 1172310791}
-  - {fileID: 1382006297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &631378491 stripped
@@ -2528,6 +2595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41f2bb3f6adb394ea04d721f6839b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectPredicted: []
+  currentCharacter: {fileID: 0}
+  currentTurn: 0
 --- !u!4 &794420263
 Transform:
   m_ObjectHideFlags: 0
@@ -4777,7 +4847,7 @@ Transform:
   - {fileID: 1996438974}
   - {fileID: 1513562194}
   - {fileID: 1862859416}
-  m_Father: {fileID: 626710897}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1382006298
 MonoBehaviour:
@@ -4791,11 +4861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c4af766a8d88f42a2b7aae26051d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockList: []
   blockMask:
     serializedVersion: 2
     m_Bits: 64
-  currentBlock: {fileID: 0}
   blockStartPoint: {fileID: 1562079021}
 --- !u!1001 &1385446125
 PrefabInstance:
@@ -8447,4 +8515,6 @@ SceneRoots:
   - {fileID: 760751934}
   - {fileID: 626710897}
   - {fileID: 796132837}
+  - {fileID: 1382006297}
   - {fileID: 794420263}
+  - {fileID: 274904049}

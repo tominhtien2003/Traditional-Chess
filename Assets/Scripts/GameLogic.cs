@@ -1,14 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
+    public List<Block> objectPredicted = new List<Block>();
     private static GameLogic instance;
     public static GameLogic Instance { get { return instance; } }
     public enum Turn
     {
         WHITE, BLACK
     }
-    private Turn currentTurn;
+    public BaseCharacter currentCharacter { get; set; }
+    public Turn currentTurn;
     private void Awake()
     {
         if (instance == null)
@@ -20,6 +23,10 @@ public class GameLogic : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Start()
+    {
+        Init();
     }
     private void Init()
     {
@@ -34,6 +41,17 @@ public class GameLogic : MonoBehaviour
     {
         return currentTurn == Turn.BLACK;
     }
+    public void ChangeTurnAutomatic()
+    {
+        if (currentTurn == Turn.BLACK)
+        {
+            currentTurn = Turn.WHITE;
+        }
+        else
+        {
+            currentTurn = Turn.BLACK;
+        }
+    }
     public void SetTurnWhite()
     {
         currentTurn = Turn.WHITE;
@@ -44,12 +62,12 @@ public class GameLogic : MonoBehaviour
     }
     public void SelectPiece(BaseCharacter character)
     {
-        MoveStrategyContext context = new MoveStrategyContext();
+        PredictionMoveStrategyContext context = new PredictionMoveStrategyContext();
 
         switch (character.chessPieceType)
         {
             case ChessPieceType.Pawn:
-                context.SetStrategy(new PawnMoveStrategy());
+                context.SetStrategy(new PawnPredictionMoveStrategy());
                 break;
             case ChessPieceType.Rook:
 
@@ -65,7 +83,14 @@ public class GameLogic : MonoBehaviour
             default:
                 break;
         }
-
         context.ExecutePredictionMove(character.currentBlock);
+    }
+    public void ResetStateAllBlockPrediction()
+    {
+        foreach (Block block in objectPredicted)
+        {
+            block.canReach = false;
+            objectPredicted.Remove(block);
+        }
     }
 }

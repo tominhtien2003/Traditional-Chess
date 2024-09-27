@@ -1,12 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
     public ChessPieceType chessPieceType;
+    public ChessSide chessSide;
     public LayerMask blockMask;
     public float moveSpeed;
     public float jumpForce;
     public Block currentBlock;
+
     protected void GetCurrentBlock()
     {
         try
@@ -39,5 +42,30 @@ public abstract class BaseCharacter : MonoBehaviour
     public void SetBlock(Block newBlock)
     {
         currentBlock = newBlock;
+    }
+    public void MoveToTarget(Block targetBlock)
+    {
+        StartCoroutine(MoveToTargetCoroutine(targetBlock));
+    }
+    private IEnumerator MoveToTargetCoroutine(Block targetBlock)
+    {
+        Vector3 startPosition = currentBlock.pivot.transform.position;
+        Vector3 targetPosition = targetBlock.pivot.transform.position;
+        currentBlock.SetPiece(null);
+        startPosition.y = targetPosition.y = transform.position.y;
+        float totalDistance = Vector3.Distance(startPosition, targetPosition);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < totalDistance / moveSpeed)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime * moveSpeed / totalDistance);
+            elapsedTime += Time.deltaTime;
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        transform.position = targetPosition;
+        GameLogic.Instance.ChangeTurnAutomatic();
+        currentBlock = targetBlock;
+        currentBlock.SetPiece(this);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveStrategyContext
+public class PredictionMoveStrategyContext
 {
     private IPredictionMoveStrategy _strategy;
 

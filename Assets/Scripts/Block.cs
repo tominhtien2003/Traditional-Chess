@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Block : BaseBlock
@@ -7,10 +6,11 @@ public class Block : BaseBlock
     {
         blockAnimation = GetComponent<Animator>();
 
-        board = GetComponentInParent<Board>();
+        //board = GetComponentInParent<Board>();
     }
     private void Start()
     {
         blockState = BlockState.NORMAL;
+        buttonPanel.forward = Camera.main.transform.forward;
     }
 }
