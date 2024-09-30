@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 public abstract class BaseBlock : MonoBehaviour
 {
     public Transform buttonPanel;
     public Animator blockAnimation { get; set; }
-    //public Board board;
+    [SerializeField] GameObject targetedObject;
     public BaseCharacter currentPiece { get; private set; }
     public Transform pivot;
     public Vector2Int positionInBoard;
@@ -34,21 +33,29 @@ public abstract class BaseBlock : MonoBehaviour
             {
                 _canReach = value;
                 OnValidCanReachChange();
-
             }
         }
     }
     private void OnValidCanReachChange()
     {
-        buttonPanel.gameObject.SetActive(blockState == BlockState.SELECTED);
+        targetedObject.SetActive(canReach);
+        if (!canReach)
+        {
+            buttonPanel.gameObject.SetActive(false);
+            blockState = BlockState.NORMAL;
+            Board.Instance.currentBlock = null;
+        }
     }
     private void OnBlockStateChanged()
     {
         if ((int)blockState < 2)
         {
             SetAnimationWhenBlockStateChanged();
+            if (canReach)
+            {
+                buttonPanel.gameObject.SetActive(blockState == BlockState.SELECTED);
+            }
         }
-
     }
     private void SetAnimationWhenBlockStateChanged()
     {

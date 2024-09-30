@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPanel: {fileID: 3608638931340590778}
+  targetedObject: {fileID: 4099859142736345103}
   pivot: {fileID: 435090454101755941}
   positionInBoard: {x: 0, y: 0}
 --- !u!95 &7350675302815959514
@@ -732,6 +733,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278327a5663316b45aa7ee1d4cfaf71d, type: 3}
+--- !u!1 &4099859142736345103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 800190058075281728, guid: 278327a5663316b45aa7ee1d4cfaf71d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3746846135181877583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5926646283682101563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7043864913580464244, guid: 278327a5663316b45aa7ee1d4cfaf71d,

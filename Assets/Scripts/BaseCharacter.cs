@@ -45,27 +45,30 @@ public abstract class BaseCharacter : MonoBehaviour
     }
     public void MoveToTarget(Block targetBlock)
     {
+        currentBlock.SetPiece(null);
+        targetBlock.SetPiece(this);
         StartCoroutine(MoveToTargetCoroutine(targetBlock));
     }
     private IEnumerator MoveToTargetCoroutine(Block targetBlock)
     {
         Vector3 startPosition = currentBlock.pivot.transform.position;
         Vector3 targetPosition = targetBlock.pivot.transform.position;
-        currentBlock.SetPiece(null);
         startPosition.y = targetPosition.y = transform.position.y;
         float totalDistance = Vector3.Distance(startPosition, targetPosition);
         float elapsedTime = 0f;
 
         while (elapsedTime < totalDistance / moveSpeed)
         {
+            //Debug.Log(elapsedTime);
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime * moveSpeed / totalDistance);
             elapsedTime += Time.deltaTime;
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
         transform.position = targetPosition;
+
+        Debug.Log(transform.position);
+
         GameLogic.Instance.ChangeTurnAutomatic();
-        currentBlock = targetBlock;
-        currentBlock.SetPiece(this);
     }
 }

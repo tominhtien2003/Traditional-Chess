@@ -49,11 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPanel: {fileID: 5003106727435396857}
-  targeted: {fileID: 1650283669331714308}
-  blockAnimation: {fileID: 0}
-  board: {fileID: 0}
+  targetedObject: {fileID: 1650283669331714308}
   pivot: {fileID: 2244141299389559695}
-  currentPositionInBoard: {x: 0, y: 0}
+  positionInBoard: {x: 0, y: 0}
 --- !u!95 &4421813549632925487
 Animator:
   serializedVersion: 5

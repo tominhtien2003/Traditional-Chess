@@ -16,6 +16,10 @@ public class BlockGFX : MonoBehaviour
         {
             return;
         }
+        StartToggleBlockState();
+    }
+    public void StartToggleBlockState()
+    {
         ToggleBlockState();
         StartCoroutine(WaitForAnimationToEnd());
     }
@@ -39,6 +43,10 @@ public class BlockGFX : MonoBehaviour
             default:
                 Debug.Log("BlockState is error");
                 break;
+        }
+        if (logicBlock.canReach)
+        {
+            logicBlock.buttonPanel.gameObject.SetActive(logicBlock.blockState == BlockState.SELECTED);
         }
     }
 

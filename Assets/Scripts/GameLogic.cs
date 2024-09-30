@@ -10,7 +10,7 @@ public class GameLogic : MonoBehaviour
     {
         WHITE, BLACK
     }
-    public BaseCharacter currentCharacter { get; set; }
+    public BaseCharacter currentCharacter { get; private set; }
     public Turn currentTurn;
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GameLogic : MonoBehaviour
     }
     private void Init()
     {
-        currentTurn = Turn.BLACK;
+        currentTurn = Turn.WHITE;
     }
     public bool IsWhiteTurn()
     {
@@ -62,6 +62,7 @@ public class GameLogic : MonoBehaviour
     }
     public void SelectPiece(BaseCharacter character)
     {
+        ResetStateAllBlockPrediction();
         PredictionMoveStrategyContext context = new PredictionMoveStrategyContext();
 
         switch (character.chessPieceType)
@@ -90,7 +91,11 @@ public class GameLogic : MonoBehaviour
         foreach (Block block in objectPredicted)
         {
             block.canReach = false;
-            objectPredicted.Remove(block);
         }
+        objectPredicted.Clear();
+    }
+    public void SetCharacter(BaseCharacter character)
+    {
+        currentCharacter = character;
     }
 }

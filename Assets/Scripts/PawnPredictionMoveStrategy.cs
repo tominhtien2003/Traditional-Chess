@@ -4,9 +4,9 @@ public class PawnPredictionMoveStrategy : IPredictionMoveStrategy
 {
     public void PredictionMove(Block block)
     {
-        GameLogic.Instance.ResetStateAllBlockPrediction();
-
         Vector2Int newPosition = GetNextMovePosition(block);
+
+        //Debug.Log(newPosition  + " " + block.positionInBoard);
 
         if (CheckLimit(newPosition.x, newPosition.y))
         {
