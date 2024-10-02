@@ -7,9 +7,4 @@ public class Pawn : BaseCharacter
         chessPieceType = ChessPieceType.Pawn;
         GetCurrentBlock();
     }
-
-    public void PredictionPawnMove()
-    {
-        
-    }
 }

@@ -10,10 +10,6 @@ public class ButtonController : MonoBehaviour
     }
     public void ButtonRefuseMove()
     {
-        ResetCurrentBlockInBoard();
-    }
-    private void ResetCurrentBlockInBoard()
-    {
         Board.Instance.currentBlock.blockState = BlockState.NORMAL;
         Board.Instance.currentBlock = null;
     }
